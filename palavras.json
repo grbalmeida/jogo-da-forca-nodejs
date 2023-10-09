@@ -1,0 +1,45 @@
+{
+    "frutas": [
+        "Abacate",
+	"Abacaxi",
+	"Acerola",
+	"Amora",
+	"Banana",
+	"Cacau",
+	"Caqui",
+	"Carambola",
+	"Cereja",
+	"Cidra",
+	"Figo",
+	"Framboesa",
+	"Goiaba",
+	"Groselha"
+    ],
+    "paises": [
+	"Angola",
+        "Brasil",
+	"Benin",
+	"Botsuana",
+	"Egito",
+	"Marrocos",
+	"Gana",
+	"Guiana",
+	"Honduras",
+	"Jamaica",
+	"Peru",
+	"Israel",
+	"Paraguai",
+	"Argentina",
+	"Chile"
+    ],
+    "estados_brasileiros": [
+        "Acre",
+	"Alagoas",
+	"Amazonas",
+	"Bahia",
+	"Pernambuco",
+	"Roraima",
+	"Sergipe",
+	"Tocantins"
+    ]
+}
