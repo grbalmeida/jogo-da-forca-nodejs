@@ -61,7 +61,7 @@ const run = async() => {
 
     if (jogo.numeroTentativas === 0) {
         console.log(jogo.desenharForca());
-        console.log(jogodesenharLetrasAcertadas(palavra).display);
+        console.log(jogo.desenharLetrasAcertadas(palavra).display);
         console.log('Número de tentativas máximas executadas!');
         console.log(`A palavra era ${palavra}`);
     }
