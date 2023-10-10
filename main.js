@@ -60,10 +60,10 @@ const run = async() => {
     }
 
     if (jogo.numeroTentativas === 0) {
-	    console.log(jogo.desenharForca());
-	    console.log(jogodesenharLetrasAcertadas(palavra).display);
+        console.log(jogo.desenharForca());
+        console.log(jogodesenharLetrasAcertadas(palavra).display);
         console.log('Número de tentativas máximas executadas!');
-	    console.log(`A palavra era ${palavra}`);
+        console.log(`A palavra era ${palavra}`);
     }
 
     const desejaContinuar = await getAnswer('Quer jogar novamente (S/N)?');
@@ -73,7 +73,7 @@ const run = async() => {
         run();
     } else {
         rl.close();
-	    console.log('Jogo encerrado!');
+        console.log('Jogo encerrado!');
     }
 }
 
