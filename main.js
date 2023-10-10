@@ -1,5 +1,7 @@
 const readline = require('readline');
 const palavras = require('./palavras.json');
+const keys = require('./dicas.json');
+const jogo = require('./jogo');
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -28,103 +30,50 @@ const geraPalavraAleatoria = (chave) => {
     return palavras[chave][numeroAleatorio];
 }
 
-const exibir = (caractere, condicao) => {
-    return condicao ? caractere : '';
-}
-
-const desenharForca = (numeroTentativas) => {
-    return `
-_______
-|     |
-|     ${exibir('O', numeroTentativas < 6)}
-|     ${exibir('|', numeroTentativas < 5)}
-|    ${exibir('/', numeroTentativas < 4)}${exibir(' ', numeroTentativas == 4)}${exibir('|', numeroTentativas < 5)}${exibir("\\", numeroTentativas < 3)}
-|     ${exibir('|', numeroTentativas < 5)}
-|    ${exibir("\/", numeroTentativas < 2)} ${exibir("\\", numeroTentativas < 1)}
-|
-_
-`;
-};
-
-const desenharLetrasAcertadas = (letrasInformadas, palavra) => {
-/*
-A B C D E
-_ _ _ _ _
-*/;
-
-    let display = '';
-    let numeroLetrasAcertadas = 0;
-
-    const letrasDaPalavra = palavra.split('');
-
-    letrasDaPalavra.forEach(letra => {
-        if (letrasInformadas.includes(letra.toUpperCase())) {
-            display += `${letra.toUpperCase()} `;
-	    numeroLetrasAcertadas++;
-	} else {
-            display += ' ';
-	}
-    });
-
-    display += '\n';
-
-    for (let i = 0; i < letrasDaPalavra.length; i++) {
-        display += `_ `;
-    }
-
-    return {display, numeroLetrasAcertadas};
-};
-
-const keys = {
-    frutas: "É uma fruta",
-    paises: "É um país",
-    estados_brasileiros: "É um estado brasileiro"
-};
-
 const run = async() => {
-    let numeroTentativas = 6;
     const chave = geraChaveAleatoria();
     const palavra = geraPalavraAleatoria(chave).toUpperCase();
-    const letrasInformadas = [];
 
     console.log(`DICA: ${keys[chave]}`);
-    console.log(desenharForca(numeroTentativas));
-    console.log(desenharLetrasAcertadas(letrasInformadas, palavra).display);
+    console.log(jogo.desenharForca());
+    console.log(jogo.desenharLetrasAcertadas(palavra).display);
 
-    while (numeroTentativas > 0) {
-         
-	const letra = await getAnswer('Digite uma letra');
-	letrasInformadas.push(letra.toUpperCase());
+    while (jogo.numeroTentativas > 0) {
+            
+        const letra = await getAnswer('Digite uma letra');
+        
+        var retorno = jogo.joga(palavra, letra);
 
-	if (!palavra.includes(letra)) {
-            numeroTentativas--;
-	}
+        if (retorno.erro) {
+            console.log(retorno.erro);
+            continue;
+        }
 
-        console.log(desenharForca(numeroTentativas));
-	var display = desenharLetrasAcertadas(letrasInformadas, palavra);
+        console.log(jogo.desenharForca());
+        var display = jogo.desenharLetrasAcertadas(palavra);
         console.log(display.display);
 
-	if (display.numeroLetrasAcertadas === palavra.length) {
+        if (display.ganhou) {
             console.log('Parabéns, você acertou a palavra!');
-	    break;
-	}
+            break;
+        }
     }
-   
 
-    if (numeroTentativas === 0) {
-	console.log(desenharForca(numeroTentativas));
-	console.log(desenharLetrasAcertadas(letrasInformadas, palavra).display);
+    if (jogo.numeroTentativas === 0) {
+	    console.log(jogo.desenharForca());
+	    console.log(jogodesenharLetrasAcertadas(palavra).display);
         console.log('Número de tentativas máximas executadas!');
-	console.log(`A palavra era ${palavra}`);
+	    console.log(`A palavra era ${palavra}`);
     }
 
     const desejaContinuar = await getAnswer('Quer jogar novamente (S/N)?');
 
     if (desejaContinuar.toUpperCase() === 'S') {
+        jogo.reiniciar();
         run();
     } else {
         rl.close();
-	console.log('Jogo encerrado!');
+	    console.log('Jogo encerrado!');
     }
 }
 

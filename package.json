@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "coverage_html": "npx jest ./src/**/*.js --coverage --config={ \"coverageReporters\": [\"html\"] }"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
