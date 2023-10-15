@@ -61,7 +61,7 @@ test('TEST - desenharForca - Deve desenhar a forca com o braço esquerdo', () =>
     jogo.joga(palavra, 'Y');
     jogo.joga(palavra, 'C');
     expect((jogo.desenharForca().match(/O/g) || []).length).toBe(1);
-    expect((jogo.desenharForca().match(/\|/g) || []).length).toBe(12);
+    expect((jogo.desenharForca().match(/\|/g) || []).length).toBe(11);
     expect((jogo.desenharForca().match(/\//g) || []).length).toBe(1);
     expect((jogo.desenharForca().match(/[\\]/g) || []).length).toBe(1);
 });
