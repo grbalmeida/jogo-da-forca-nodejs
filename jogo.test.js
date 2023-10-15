@@ -28,7 +28,7 @@ test('TEST - reiniciar - Deve reiniciar o jogo', () => {
 test('TEST - desenharForca - Deve desenhar a forca sem personagem', () => {
     jogo.reiniciar();
     expect((jogo.desenharForca().match(/O/g) || []).length).toBe(0);
-    expect((jogo.desenharForca().match(/\|/g) || []).length).toBe(8);
+    expect((jogo.desenharForca().match(/\|/g) || []).length).toBe(9);
     expect((jogo.desenharForca().match(/\//g) || []).length).toBe(0);
     expect((jogo.desenharForca().match(/[\\]/g) || []).length).toBe(0);
 });
@@ -38,7 +38,7 @@ test('TEST - desenharForca - Deve desenhar a forca com a cabeça', () => {
     let palavra = 'ARROZ';
     jogo.joga(palavra, 'Q');
     expect((jogo.desenharForca().match(/O/g) || []).length).toBe(1);
-    expect((jogo.desenharForca().match(/\|/g) || []).length).toBe(8); // valor inicial, só tem 8 pipes porque a forca esta vazia
+    expect((jogo.desenharForca().match(/\|/g) || []).length).toBe(9); // valor inicial, só tem 9 pipes porque a forca esta vazia
     expect((jogo.desenharForca().match(/\//g) || []).length).toBe(0);
     expect((jogo.desenharForca().match(/[\\]/g) || []).length).toBe(0);
 });
@@ -74,7 +74,7 @@ test('TEST - desenharForca - Deve desenhar a forca com o braço esquerdo', () =>
     jogo.joga(palavra, 'Y');
     jogo.joga(palavra, 'C');
     expect((jogo.desenharForca().match(/O/g) || []).length).toBe(1);
-    expect((jogo.desenharForca().match(/\|/g) || []).length).toBe(11);
+    expect((jogo.desenharForca().match(/\|/g) || []).length).toBe(12);
     expect((jogo.desenharForca().match(/\//g) || []).length).toBe(1);
     expect((jogo.desenharForca().match(/[\\]/g) || []).length).toBe(1);
 });

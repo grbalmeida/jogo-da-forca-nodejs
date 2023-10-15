@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 module.exports = {
     numeroTentativas: 6,
     letrasInformadas: [],
@@ -9,17 +11,14 @@ module.exports = {
         this.letrasInformadas = [];
     },
     desenharForca: function() {
-        return `
-_______
-|     |
-|     ${this.exibir('O', this.numeroTentativas < 6)}
-|     ${this.exibir('|', this.numeroTentativas < 5)}
-|    ${this.exibir('/', this.numeroTentativas < 4)}${this.exibir(' ', this.numeroTentativas == 4)}${this.exibir('|', this.numeroTentativas < 5)}${this.exibir("\\", this.numeroTentativas < 3)}
-|     ${this.exibir('|', this.numeroTentativas < 5)}
-|    ${this.exibir("\/", this.numeroTentativas < 2)} ${this.exibir("\\", this.numeroTentativas < 1)}
-|
-_
-`;
+        let personagem = '';
+        try {  
+            personagem = fs.readFileSync(`./personagens/tentativas_${this.numeroTentativas}.txt`, 'utf8');
+        } catch(e) {
+            console.log('Error:', e.stack);
+        }
+
+        return personagem;
     },
     normalizarString: function(str) {
         return str.toUpperCase().normalize('NFD').replace(/[\u0300-\u036F]/g, '')
