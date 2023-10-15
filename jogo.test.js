@@ -1,18 +1,5 @@
 const jogo = require('./jogo');
 
-test('TEST - exibir - Deve exibir caractere se condição for true', () => {
-    let tentativas = 5;
-    expect(jogo.exibir('O', tentativas < 6)).toBe('O');
-
-    tentativas = 4;
-    expect(jogo.exibir('|', tentativas < 5)).toBe('|');
-});
-
-test('TEST - exibir - Não deve exibir caractere se condição for false', () => {
-    expect(jogo.exibir('X', false)).toBe('');
-    expect(jogo.exibir('Z', false)).toBe('');
-});
-
 test('TEST - reiniciar - Deve reiniciar o jogo', () => {
     jogo.numeroTentativas = 0;
     jogo.reiniciar();

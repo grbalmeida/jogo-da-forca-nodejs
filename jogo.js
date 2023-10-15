@@ -3,9 +3,6 @@ var fs = require('fs');
 module.exports = {
     numeroTentativas: 6,
     letrasInformadas: [],
-    exibir: function(caractere, condicao) {
-        return condicao ? caractere : '';
-    },
     reiniciar: function() {
         this.numeroTentativas = 6;
         this.letrasInformadas = [];
